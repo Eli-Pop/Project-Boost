@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://bc088xfmmp2ki"]
+
+[ext_resource type="Script" path="res://Level/LandingPad.gd" id="1_oumlw"]
+[ext_resource type="PackedScene" uid="uid://dsn3urdq7puvl" path="res://player.tscn" id="2_k8olc"]
+[ext_resource type="PackedScene" uid="uid://bigh2icg0fjan" path="res://Background.tscn" id="3_c7tyx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_85bx1"]
+albedo_color = Color(0.890196, 0.501961, 0.917647, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w3kmq"]
+albedo_color = Color(0.337255, 0.662745, 0.788235, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nntap"]
+albedo_color = Color(0.0876, 0.73, 0.237493, 1)
+
+[node name="Level" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0420976, -0.0426064, 0.0115871)
+
+[node name="Obstacle" type="CSGBox3D" parent="." groups=["Hazard"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.43218, 0)
+use_collision = true
+size = Vector3(3, 2, 3)
+material = SubResource("StandardMaterial3D_85bx1")
+
+[node name="LaunchPad" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0.2, 0)
+use_collision = true
+size = Vector3(2, 0.4, 2)
+material = SubResource("StandardMaterial3D_w3kmq")
+
+[node name="LandingPad" type="CSGBox3D" parent="." groups=["Goal"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.2, 0)
+use_collision = true
+size = Vector3(2, 0.4, 2)
+material = SubResource("StandardMaterial3D_nntap")
+script = ExtResource("1_oumlw")
+file_path = "res://Level/level_3.tscn"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.978148, 0.207912, 0, -0.207912, 0.978148, 0, 5.817, 9.33)
+
+[node name="Player" parent="." instance=ExtResource("2_k8olc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1.4, 0)
+
+[node name="Floor" parent="." instance=ExtResource("3_c7tyx")]
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="Floor"]
+transform = Transform3D(0.996195, 0.0560225, -0.066765, -5.4099e-09, 0.766044, 0.642788, 0.0871555, -0.640342, 0.763129, 0, 0, 0)
+light_energy = 0.5
+shadow_enabled = true
